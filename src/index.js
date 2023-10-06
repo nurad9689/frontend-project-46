@@ -7,12 +7,15 @@ const resolvePath = (filePath) => (
     ? path.resolve(process.cwd(), filePath)
     : path.resolve(process.cwd(), `__fixtures__/${filePath}`));
 
-const genDiff = (filepath1, filepath2) => {
-  const data1 = fs.readFileSync(resolvePath(filepath1));
-  const data2 = fs.readFileSync(resolvePath(filepath2));
+const getParsedObj = (filePath) => {
+  const pathname = resolvePath(filePath);
+  const data = fs.readFileSync(pathname);
+  return JSON.parse(data);
+};
 
-  const obj1 = JSON.parse(data1);
-  const obj2 = JSON.parse(data2);
+const genDiff = (filepath1, filepath2) => {
+  const obj1 = getParsedObj(filepath1);
+  const obj2 = getParsedObj(filepath2);
 
   const keys = _.union(Object.keys(obj1), Object.keys(obj2)).sort();
 
