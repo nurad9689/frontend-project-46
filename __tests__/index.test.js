@@ -32,4 +32,12 @@ describe.each(cases)('"%s" and "%s" extentions:', (extent1, extent2) => {
     const path2 = getFixturePath(`file2.${extent2}`);
     expect(genDiff(path1, path2, 'plain')).toEqual(result);
   });
+
+  test('JSON', () => {
+    const resultPath = getFixturePath('JSON.json');
+    const result = fs.readFileSync(resultPath, 'utf-8');
+    const path1 = getFixturePath(`file1.${extent1}`);
+    const path2 = getFixturePath(`file2.${extent2}`);
+    expect(genDiff(path1, path2, 'json')).toEqual(result);
+  });
 });
