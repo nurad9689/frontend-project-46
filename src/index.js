@@ -1,26 +1,13 @@
-import _ from 'lodash';
-import parser from './parsers.js';
+import parser from './parser.js';
+import comparisonRules from './compression.js';
+import formatter from './formatters/build.js';
 
-const genDiff = (filepath1, filepath2) => {
-  const obj1 = parser(filepath1);
-  const obj2 = parser(filepath2);
-
-  const keys = _.union(Object.keys(obj1), Object.keys(obj2)).sort();
-  const result = keys.reduce((acc, key) => {
-    if (Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) {
-      if (obj1[key] !== obj2[key]) {
-        return [...acc, `  - ${key}: ${obj1[key]}`, `  + ${key}: ${obj2[key]}`];
-      }
-      return [...acc, `    ${key}: ${obj1[key]}`];
-    }
-
-    if (Object.hasOwn(obj1, key) && !Object.hasOwn(obj2, key)) {
-      return [...acc, `  - ${key}: ${obj1[key]}`];
-    }
-    return [...acc, `  + ${key}: ${obj2[key]}`];
-  }, []);
-
-  return `{\n${result.join('\n')}\n}`;
+const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
+  const file1 = parser(filepath1);
+  const file2 = parser(filepath2);
+  const comparison = comparisonRules(file1, file2);
+  const result = formatter(comparison, formatName);
+  return result;
 };
 
 export default genDiff;
