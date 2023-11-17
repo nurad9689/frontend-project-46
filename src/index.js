@@ -1,6 +1,6 @@
 import parser from './parser.js';
 import comparisonRules from './compression.js';
-import formatter from './formatters/build.js';
+import formatter from './formatters/index.js';
 
 const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   const file1 = parser(filepath1);
