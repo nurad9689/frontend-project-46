@@ -2,13 +2,14 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "«Вычислитель отличий» -  программа, определяющая разницу между двумя структурами данных.",
+  "main": "src/index.js",
+  "type": "module",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
   "simple-git-hooks": {
     "pre-push": "make lint"
   },
-  "main": "index.js",
   "scripts": {
     "test": "npx jest"
   },
@@ -21,7 +22,6 @@
   "bugs": {
     "url": "https://github.com/nurad9689/frontend-project-46/issues"
   },
-  "type": "module",
   "homepage": "https://github.com/nurad9689/frontend-project-46#readme",
   "dependencies": {
     "commander": "^11.0.0",
