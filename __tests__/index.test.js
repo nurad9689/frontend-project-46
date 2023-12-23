@@ -16,7 +16,7 @@ const __dirname = dirname(__filename);
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
-describe.each(cases)('"%s" and "%s" extentions:', (extent1, extent2) => {
+describe.each(cases)('"%s" and "%s" formats:', (extent1, extent2) => {
   test('Stylish (default)', () => {
     const resultPath = getFixturePath('Stylish.txt');
     const result = fs.readFileSync(resultPath, 'utf-8');
