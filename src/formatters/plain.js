@@ -1,4 +1,4 @@
-const stylizator = (val) => {
+const stingify = (val) => {
   if (typeof val === 'string') {
     return `'${val}'`;
   } if (typeof val === 'object' && val !== null) {
@@ -11,11 +11,11 @@ const plain = (tree) => {
     const fullPath = (depth === '') ? `${obj.name}` : `${depth}.${obj.name}`;
     switch (obj.status) {
       case 'added':
-        return `Property '${fullPath}' was added with value: ${stylizator(obj.value)}`;
+        return `Property '${fullPath}' was added with value: ${stingify(obj.value)}`;
       case 'deleted':
         return `Property '${fullPath}' was removed`;
       case 'different values':
-        return `Property '${fullPath}' was updated. From ${stylizator(obj.value1)} to ${stylizator(obj.value2)}`;
+        return `Property '${fullPath}' was updated. From ${stingify(obj.value1)} to ${stingify(obj.value2)}`;
       case 'object':
         return iter(obj.value, fullPath);
       case 'unchanged':
